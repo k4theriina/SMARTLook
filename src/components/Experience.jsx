@@ -1,26 +1,66 @@
-import { Gltf, OrbitControls, Bounds, Environment } from "@react-three/drei";
-import { Suspense } from "react";
+import {
+  OrbitControls,
+  Bounds,
+  Environment,
+  Gltf,
+} from "@react-three/drei";
+import { Suspense, useEffect, useRef } from "react";
 import { Loader } from "./Loader";
+import * as THREE from "three";
 
 export const Experience = () => {
+  const glowingMeshRef = useRef(null);
+  const originalMaterialRef = useRef(null);
+
+  const handlePointerOver = (e) => {
+    e.stopPropagation();
+
+    console.log("Hovered:", e.object.name);
+    console.log("----------------");
+
+    if (e.object.name !== "BigNuclear") return;
+
+    if (!originalMaterialRef.current) {
+      originalMaterialRef.current = e.object.material;
+      e.object.material = e.object.material.clone();
+      glowingMeshRef.current = e.object;
+    }
+
+    e.object.material.emissive = new THREE.Color("white");
+    e.object.material.emissiveIntensity = 0.1;
+    document.body.style.cursor = "pointer";
+  };
+
+  const handlePointerOut = (e) => {
+    e.stopPropagation();
+
+    if (!glowingMeshRef.current) return;
+
+    glowingMeshRef.current.material.emissive.set("black");
+    glowingMeshRef.current.material.emissiveIntensity = 0;
+    document.body.style.cursor = "default";
+  };
+
   return (
     <>
-      <ambientLight intensity={1} />
+      <ambientLight intensity={0.6} />
       <Environment preset="warehouse" />
-      <OrbitControls />
+
+      <OrbitControls
+        makeDefault
+        enableDamping={false}
+        maxPolarAngle={Math.PI / 2.1}
+      />
+
 
       <Suspense fallback={<Loader />}>
-        <Bounds
-          fit
-          clip
-          margin={0.9} // how far the camera is from the bounds (1 = default)
-        >
-          <Gltf src="/models/smartLookRoom.glb" 
-          position={[-1.5, -2.5, 0]}/>
-        </Bounds>
+          <Gltf
+            src="/models/smartLookRoom.glb"
+            position={[2.5, -2.5, 7]}
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
+          />
       </Suspense>
-
-      <Environment preset="warehouse" />
     </>
   );
 };
