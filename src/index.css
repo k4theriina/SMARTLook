@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 #root {
   width: 100vw;
   height: 100vh;
@@ -5,4 +7,10 @@
 
 body {
   margin: 0;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
 }
