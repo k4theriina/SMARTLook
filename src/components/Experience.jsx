@@ -1,12 +1,9 @@
-import {
-  OrbitControls,
-  Environment,
-} from "@react-three/drei";
+import { OrbitControls, Environment } from "@react-three/drei";
 import { Suspense } from "react";
 import { Loader } from "./Loader";
-import { SmartRoom } from "./SmartRoom.jsx";
+import { SmartRoom } from "./SmartRoom";
 
-export const Experience = () => {
+export const Experience = ({ onSelectMachine }) => {
   return (
     <>
       <ambientLight intensity={0.6} />
@@ -14,12 +11,15 @@ export const Experience = () => {
 
       <OrbitControls
         makeDefault
+        enableDamping={false}
         maxPolarAngle={Math.PI / 2.1}
       />
 
-      {/* 👇 Suspense MUST wrap the component that calls useGLTF */}
       <Suspense fallback={<Loader />}>
-        <SmartRoom position={[2.5, -2.5, 7]} />
+        <SmartRoom
+          position={[2.5, -2.5, 7]}
+          onSelectMachine={onSelectMachine}
+        />
       </Suspense>
     </>
   );

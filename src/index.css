@@ -14,3 +14,51 @@ body {
   50% { opacity: 1; }
   100% { opacity: 0.6; }
 }
+
+.app {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.logo {
+  position: fixed;
+  top: 16px;
+  left: 30px;
+  width: 220px;
+  height: auto;
+  z-index: 10;        /* above canvas */
+  pointer-events: none; /* doesn’t block mouse */
+}
+
+canvas {
+  flex: 1;
+}
+
+.dashboard {
+  top: 20%;
+  right: 5%;
+  border-radius: 20px;
+  position: fixed;
+  z-index: 15;
+  width: 360px;
+  background: #111;
+  color: #fff;
+  padding: 16px;
+  border-left: 5px solid #333;
+  overflow-y: auto;
+}
+
+.dashboard h2 {
+  margin-bottom: 12px;
+}
+
+.dashboard section {
+  margin-bottom: 16px;
+}
+
+.dashboard h3 {
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 6px;
+}
