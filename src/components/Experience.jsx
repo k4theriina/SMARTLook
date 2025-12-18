@@ -11,7 +11,7 @@ export const Experience = ({ onPumpClick, roomOffset }) => {
 
       <OrbitControls
         makeDefault
-        enableDamping={false}
+        // enableDamping={false}
         maxPolarAngle={Math.PI / 2.1}
       />
 
