@@ -5,11 +5,14 @@ import * as THREE from "three/webgpu";
 import { WebGPURenderer } from "three/webgpu";
 import { Dashboard } from "./components/Dashboard";
 import { useState } from "react";
+import { useProgress } from "@react-three/drei";
+
 
 
 function App() {
   const [dashboardVisible, setDashboardVisible] = useState(false);
   const [roomOffset, setRoomOffset] = useState(0);
+  const { active } = useProgress();
 
   const handlePumpClick = () => {
     setDashboardVisible(v => !v);
@@ -41,13 +44,14 @@ function App() {
           />
       </Canvas>
 
-      <img
-        src="/Logo.svg"
-        alt="SMARTLook Logo"
-        className="logo"
+      {!active && (
+        <img
+          src="/Logo.svg"
+          alt="SMARTLook Logo"
+          className="logo"
         />
-        <Dashboard className={`dashboard ${dashboardVisible ? "seen" : "hidden"}`}></Dashboard>
-        {/* <Dashboard></Dashboard> */}
+      )}
+      <Dashboard className={`dashboard ${dashboardVisible ? "seen" : "hidden"}`}></Dashboard>
     </>
 
 
