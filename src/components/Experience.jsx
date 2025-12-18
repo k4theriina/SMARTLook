@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { Loader } from "./Loader";
 import { SmartRoom } from "./SmartRoom";
 
-export const Experience = ({ onSelectMachine }) => {
+export const Experience = ({ onPumpClick, roomOffset }) => {
   return (
     <>
       <ambientLight intensity={0.6} />
@@ -17,10 +17,11 @@ export const Experience = ({ onSelectMachine }) => {
 
       <Suspense fallback={<Loader />}>
         <SmartRoom
-          position={[2.5, -2.5, 7]}
-          onSelectMachine={onSelectMachine}
+          position={[2.5 + roomOffset, -2.5, 7 - roomOffset]}
+          onPumpClick={onPumpClick}
         />
       </Suspense>
     </>
   );
 };
+

@@ -4,8 +4,18 @@ import { Experience } from "./components/Experience";
 import * as THREE from "three/webgpu";
 import { WebGPURenderer } from "three/webgpu";
 import { Dashboard } from "./components/Dashboard";
+import { useState } from "react";
+
 
 function App() {
+  const [dashboardVisible, setDashboardVisible] = useState(false);
+  const [roomOffset, setRoomOffset] = useState(0);
+
+  const handlePumpClick = () => {
+    setDashboardVisible(v => !v);
+    setRoomOffset(o => (o === 0 ? -5 : 0)); // ← move left 5
+  };
+  
   return (
     <>
       <Canvas
@@ -25,7 +35,10 @@ function App() {
         }}
       >
         <color attach="background" args={["#000000"]} />
-          <Experience />
+          <Experience 
+            onPumpClick={handlePumpClick}
+            roomOffset = {roomOffset}  
+          />
       </Canvas>
 
       <img
@@ -33,7 +46,8 @@ function App() {
         alt="SMARTLook Logo"
         className="logo"
         />
-        <Dashboard></Dashboard>
+        <Dashboard className={`dashboard ${dashboardVisible ? "seen" : "hidden"}`}></Dashboard>
+        {/* <Dashboard></Dashboard> */}
     </>
 
 

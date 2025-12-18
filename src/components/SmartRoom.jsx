@@ -2,13 +2,12 @@ import { useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-export const SmartRoom = (props) => {
+export const SmartRoom = ({ onPumpClick, ...props }) => {
   const { scene, nodes } = useGLTF("/models/smartLookRoom.glb");
   const pump = nodes.BigNuclear;
 
   const originalMaterial = useRef(null);
 
-  // Freeze static scene (perf)
   useEffect(() => {
     scene.traverse((obj) => {
       if (!obj.isMesh) return;
@@ -39,12 +38,18 @@ export const SmartRoom = (props) => {
     document.body.style.cursor = "default";
   };
 
+  const onClick= (e) => {
+    e.stopPropagation();
+    onPumpClick();
+  }
+
   return (
     <primitive object={scene} {...props}>
       <primitive
         object={pump}
         onPointerOver={onPointerOver}
         onPointerOut={onPointerOut}
+        onClick={onClick}
       />
     </primitive>
   );

@@ -1,7 +1,6 @@
-export const Dashboard = ({ machine }) => {
-    
+export const Dashboard = ({ className }) => {
   return (
-    <div className="dashboard">
+    <div className={className}>
       <h2>Pump Vitals</h2>
 
       <section>
