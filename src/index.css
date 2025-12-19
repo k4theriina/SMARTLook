@@ -78,3 +78,13 @@ canvas {
   color: #aaa;
   margin-bottom: 6px;
 }
+
+.LogButton {
+  position: fixed;
+  background-color: aqua;
+  width: 100px;
+  height: 40px;
+  margin: 10px;
+  top: 2px;
+  color: red;
+}
