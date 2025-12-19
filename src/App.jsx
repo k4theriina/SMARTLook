@@ -11,7 +11,11 @@ import { Dashboard } from "./components/Dashboard";
 function App() {
   const [dashboardVisible, setDashboardVisible] = useState(false);
   const [roomOffset, setRoomOffset] = useState(0);
+
+  const [rows, setRows] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [dashboardData, setDashboardData] = useState(null);
+
 
   const handlePumpClick = () => {
     setDashboardVisible((v) => !v);
@@ -20,28 +24,36 @@ function App() {
 
   // Dynamic CSV loading every second
   useEffect(() => {
-    let interval;
+  Papa.parse("/data/scada_pipeline.csv", {
+    download: true,
+    header: true,
+    dynamicTyping: true,
+    complete: (results) => {
+      const cleanRows = results.data.filter(Boolean);
+      setRows(cleanRows);
 
-    const fetchData = () => {
-      Papa.parse("/data/scada_pipeline.csv", {
-        download: true,
-        header: true,
-        dynamicTyping: true,
-        complete: (results) => {
-          if (results.data.length > 0) {
-            // pick random row for demo/live effect
-            const randomIndex = Math.floor(Math.random() * results.data.length);
-            setDashboardData(results.data[randomIndex]);
-          }
-        },
-      });
-    };
+      // 👇 choose your starting row here
+      const START_INDEX = 3; // ← change this anytime
+      setCurrentIndex(START_INDEX);
+      setDashboardData(cleanRows[START_INDEX]);
+    },
+  });
+}, []);
 
-    fetchData(); // fetch immediately
-    interval = setInterval(fetchData, 8000); // update every 4 seconds
+useEffect(() => {
+  if (!rows.length) return;
 
-    return () => clearInterval(interval);
-  }, []);
+  const interval = setInterval(() => {
+    setCurrentIndex((prev) => {
+      const next = (prev + 1) % rows.length;
+      setDashboardData(rows[next]);
+      return next;
+    });
+  }, 6000); // change data every __ seconds
+
+  return () => clearInterval(interval);
+}, [rows]);
+
 
   return (
     <>

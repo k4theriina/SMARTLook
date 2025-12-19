@@ -2,12 +2,13 @@ import { useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-export const SmartRoom = ({ onPumpClick, ...props }) => {
+export const SmartRoom = ({ onPumpClick, eventType, ...props }) => {
   const { scene, nodes } = useGLTF("/models/smartLookRoom.glb");
   const pump = nodes.BigNuclear;
 
-  const originalMaterial = useRef(null);
+  const materialRef = useRef(null);
 
+  // Freeze transforms (good optimization)
   useEffect(() => {
     scene.traverse((obj) => {
       if (!obj.isMesh) return;
@@ -17,31 +18,46 @@ export const SmartRoom = ({ onPumpClick, ...props }) => {
     });
   }, [scene]);
 
+  // Clone material ONCE
+  useEffect(() => {
+    if (!pump || materialRef.current) return;
+
+    materialRef.current = pump.material.clone();
+    pump.material = materialRef.current;
+    pump.material.emissive = new THREE.Color("black");
+    pump.material.emissiveIntensity = 0;
+  }, [pump]);
+
+  // 🔥 STATUS → GLOW (DATA DRIVEN)
+  useEffect(() => {
+    if (!materialRef.current) return;
+
+    if (eventType?.toLowerCase() === "normal") {
+      materialRef.current.emissive.set("black");
+      materialRef.current.emissiveIntensity = 0;
+    } else if (eventType === "Warning") {
+      materialRef.current.emissive.set("yellow");
+      materialRef.current.emissiveIntensity = 0.25;
+    } else if (eventType) {
+      materialRef.current.emissive.set("red");
+      materialRef.current.emissiveIntensity = 0.35;
+    }
+  }, [eventType]);
+
+  // Hover ONLY affects cursor
   const onPointerOver = (e) => {
     e.stopPropagation();
-
-    if (!originalMaterial.current) {
-      originalMaterial.current = pump.material;
-      pump.material = pump.material.clone();
-    }
-
-    pump.material.emissive.set("white");
-    pump.material.emissiveIntensity = 0.15;
     document.body.style.cursor = "pointer";
   };
 
-  const onPointerOut = (e) => {
-    e.stopPropagation();
-
-    pump.material.emissive.set("black");
-    pump.material.emissiveIntensity = 0;
+  const onPointerOut = () => {
     document.body.style.cursor = "default";
   };
 
-  const onClick= (e) => {
+  const onClick = (e) => {
     e.stopPropagation();
     onPumpClick();
-  }
+  };
 
   return (
     <primitive object={scene} {...props}>

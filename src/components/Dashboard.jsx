@@ -4,10 +4,10 @@ export const Dashboard = ({ className, data }) => {
   if (!data) return <div className={className}>Loading Data...</div>;
 
   // Smooth animation for numbers
-  const pressure = useSpring({ value: data.pressure ?? 0, config: { tension: 20, friction: 20 } });
+  const pressure = useSpring({ value: data.pressure ?? 0, config: { tension: 50, friction: 20 } });
   const flowRate = useSpring({ value: data.flow_rate ?? 0, config: { tension: 30, friction: 20 } });
   const temperature = useSpring({ value: data.temperature ?? 0, config: { tension: 80, friction: 20 } });
-  const pumpSpeed = useSpring({ value: data.pump_speed ?? 0, config: { tension: 40, friction: 20 } });
+  const pumpSpeed = useSpring({ value: data.pump_speed ?? 0, config: { tension: 60, friction: 20 } });
   const energyConsumption = useSpring({ value: data.energy_consumption ?? 0, config: { tension: 50, friction: 20 } });
 
   const getStatusColor = () => {
