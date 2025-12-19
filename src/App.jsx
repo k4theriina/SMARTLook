@@ -14,7 +14,7 @@ function App() {
 
   const handlePumpClick = () => {
     setDashboardVisible((v) => !v);
-    setRoomOffset((o) => (o === 0 ? -5 : 0)); // move room left/right
+    setRoomOffset((o) => (o === 0 ? -5 : 0));
   };
 
   // Dynamic CSV loading every second
@@ -37,7 +37,7 @@ function App() {
     };
 
     fetchData(); // fetch immediately
-    interval = setInterval(fetchData, 3000); // update every second
+    interval = setInterval(fetchData, 2500); // update every 2.5 seconds
 
     return () => clearInterval(interval);
   }, []);
@@ -59,7 +59,11 @@ function App() {
       >
         {/* Keep background black */}
         <color attach="background" args={["#000000"]} />
-        <Experience onPumpClick={handlePumpClick} roomOffset={roomOffset} />
+        <Experience 
+          onPumpClick={handlePumpClick} 
+          roomOffset={roomOffset}
+          eventType={dashboardData?.event_type}
+        />
       </Canvas>
 
       {/* Dashboard only renders when CSV data is loaded */}
@@ -67,6 +71,7 @@ function App() {
         <Dashboard
           className={`dashboard ${dashboardVisible ? "seen" : "hidden"}`}
           data={dashboardData}
+          eventType={dashboardData?.event_type}
         />
       )}
     </>

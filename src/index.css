@@ -59,6 +59,12 @@ canvas {
   overflow-y: auto;
 }
 
+.dashboard h1 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom:5px;
+}
+
 .dashboard h2 {
   margin-bottom: 12px;
 }

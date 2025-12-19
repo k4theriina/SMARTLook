@@ -10,9 +10,25 @@ export const Dashboard = ({ className, data }) => {
   const pumpSpeed = useSpring({ value: data.pump_speed ?? 0, config: { tension: 120, friction: 20 } });
   const energyConsumption = useSpring({ value: data.energy_consumption ?? 0, config: { tension: 120, friction: 20 } });
 
+  const getStatusColor = () => {
+    if (data.event_type === "normal") return "#57e64b";
+    else if (data.event_type === "Warning") return "yellow";
+    else return "red";
+  };
+
   return (
     <div className={className}>
-      <h2>Pump Vitals</h2>
+      <h1> <span
+          style={{
+            width: "14px",
+            height: "14px",
+            borderRadius: "50%",
+            backgroundColor: getStatusColor(),
+            display: "inline-block",
+            marginRight: "10px",
+          }}
+        ></span>Pump Vitals</h1>
+      
 
       <section>
         <h3>Continuous Sensors</h3>
