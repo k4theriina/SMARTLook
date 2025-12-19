@@ -49,7 +49,7 @@ useEffect(() => {
       setDashboardData(rows[next]);
       return next;
     });
-  }, 6000); // change data every __ seconds
+  }, 4000); // change data every __ seconds
 
   return () => clearInterval(interval);
 }, [rows]);
