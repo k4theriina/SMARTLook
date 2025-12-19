@@ -33,7 +33,7 @@ function App() {
       setRows(cleanRows);
 
       // 👇 choose your starting row here
-      const START_INDEX = 2; // ← change this anytime
+      const START_INDEX = 1; // ← change this anytime
       setCurrentIndex(START_INDEX);
       setDashboardData(cleanRows[START_INDEX]);
     },
@@ -88,7 +88,11 @@ useEffect(() => {
           eventType={dashboardData?.event_type}
         />
       )}
-
+      <img
+        src="EyeLogo.svg"
+        className="logo"
+        >
+      </img>
     </>
   );
 }
