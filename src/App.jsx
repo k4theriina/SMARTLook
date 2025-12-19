@@ -33,7 +33,7 @@ function App() {
       setRows(cleanRows);
 
       // 👇 choose your starting row here
-      const START_INDEX = 3; // ← change this anytime
+      const START_INDEX = 2; // ← change this anytime
       setCurrentIndex(START_INDEX);
       setDashboardData(cleanRows[START_INDEX]);
     },

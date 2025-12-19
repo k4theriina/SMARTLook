@@ -45,14 +45,36 @@ export const SmartRoom = ({ onPumpClick, eventType, ...props }) => {
   }, [eventType]);
 
   // Hover ONLY affects cursor
-  const onPointerOver = (e) => {
+    const onPointerOver = (e) => {
     e.stopPropagation();
+    if (!materialRef.current) return;
+
+    // Save current emissive color
+    materialRef.current.userData.prevEmissive = materialRef.current.emissive.getHex();
+
+    // Hover glow
+    materialRef.current.emissive.set("white");
+    materialRef.current.emissiveIntensity = 0.25;
+
     document.body.style.cursor = "pointer";
   };
 
-  const onPointerOut = () => {
+  const onPointerOut = (e) => {
+    e.stopPropagation();
+    if (!materialRef.current) return;
+
+    // Restore status color
+    const prevHex = materialRef.current.userData.prevEmissive ?? 0x000000;
+    materialRef.current.emissive.set(prevHex);
+
+    // Restore intensity depending on status
+    if (eventType?.toLowerCase() === "normal") materialRef.current.emissiveIntensity = 0;
+    else if (eventType === "Warning") materialRef.current.emissiveIntensity = 0.25;
+    else if (eventType) materialRef.current.emissiveIntensity = 0.35;
+
     document.body.style.cursor = "default";
   };
+
 
   const onClick = (e) => {
     e.stopPropagation();
