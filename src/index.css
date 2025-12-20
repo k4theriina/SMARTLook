@@ -31,8 +31,17 @@ body {
   pointer-events: none; /* doesn’t block mouse */
 }
 
+.ui-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+
 canvas {
   flex: 1;
+  z-index: 0;
 }
 
 .dashboard.hidden {
@@ -43,6 +52,19 @@ canvas {
   visibility: visible;
 }
 
+/* Dashboard & log should capture clicks */
+.dashboard,
+.log-panel {
+  position: fixed;
+  pointer-events: auto;
+  z-index: 20;
+}
+
+/* Optional: cursor feedback */
+.dashboard button,
+.log-panel button {
+  cursor: pointer;
+}
 
 .dashboard {
   visibility: hidden;
@@ -55,7 +77,7 @@ canvas {
   background: #111;
   color: #fff;
   padding: 16px;
-  border-left: 5px solid #333;
+  border-left: 5px solid #0A7AFD;
   overflow-y: auto;
 }
 
@@ -80,11 +102,17 @@ canvas {
 }
 
 .LogButton {
-  position: fixed;
-  background-color: aqua;
-  width: 100px;
-  height: 40px;
+  position: absolute;
+  background-color: #F3F5F3;
+  width: 140px;
+  height: 50px;
   margin: 10px;
   top: 2px;
-  color: red;
+  color: #1E1E1E;
+  border-radius: 20px;
+  z-index: 20;
+}
+
+.log-panel {
+  background-color: #F3F5F3;
 }

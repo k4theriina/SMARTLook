@@ -7,6 +7,7 @@ import createVerticalGradientTexture from "./components/createVerticalGradientTe
 
 import { Experience } from "./components/Experience";
 import { Dashboard } from "./components/Dashboard";
+import { MachineLog } from "./components/MachineLog";
 
 function App() {
   const [dashboardVisible, setDashboardVisible] = useState(false);
@@ -15,6 +16,9 @@ function App() {
   const [rows, setRows] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dashboardData, setDashboardData] = useState(null);
+  const [logVisible, setLogVisible] = useState(false);
+  const logRows = rows.slice(0, currentIndex + 1);
+
 
 
   const handlePumpClick = () => {
@@ -80,14 +84,31 @@ useEffect(() => {
         />
       </Canvas>
 
-      {/* Dashboard only renders when CSV data is loaded */}
-      {dashboardData && (
-        <Dashboard
-          className={`dashboard ${dashboardVisible ? "seen" : "hidden"}`}
-          data={dashboardData}
-          eventType={dashboardData?.event_type}
-        />
-      )}
+      <div className="ui-overlay">
+        {dashboardData && (
+          <Dashboard
+            className={`dashboard ${dashboardVisible ? "seen" : "hidden"}`}
+            data={dashboardData}
+            rows={rows}
+            currentIndex={currentIndex}
+            logVisible={logVisible}
+            setLogVisible={setLogVisible}
+          />
+
+        )}
+        
+        {logVisible && (
+          <MachineLog
+            rows={rows.slice(0, currentIndex + 1)}
+            onClose={() => setLogVisible(false)}
+          />
+          )}
+          {/* <MachineLog
+            rows={rows.slice(0, currentIndex + 1)}
+            onClose={() => setLogVisible(false)}
+          /> */}
+          </div>
+
       <img
         src="EyeLogo.svg"
         className="logo"

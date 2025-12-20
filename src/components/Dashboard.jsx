@@ -1,6 +1,10 @@
 import { useSpring, animated } from "@react-spring/web";
 
-export const Dashboard = ({ className, data }) => {
+export const Dashboard = ({
+  className,
+  data,
+  setLogVisible
+}) => {
   if (!data) return <div className={className}>Loading Data...</div>;
 
   // Smooth animation for numbers
@@ -70,7 +74,13 @@ export const Dashboard = ({ className, data }) => {
         </section>
       </div>
 
-      {/* <button className="LogButton">View Logs</button> */}
+      {/* <button className="LogButton" style={{ cursor: "pointer" }}
+  onClick={() => {
+    console.log("VIEW LOGS CLICKED");
+    setLogVisible(true);
+  }}>
+        View Logs
+      </button> */}
     </>
     
   );
