@@ -1,25 +1,22 @@
 import jsPDF from "jspdf";
-import "jspdf-autotable";
+import autoTable from "jspdf-autotable";
 
 const downloadPDF = (rows) => {
   const doc = new jsPDF();
 
-  doc.text("SMARTLook Machine Event Log", 14, 16);
-
-  const tableData = rows.map((row) => [
-    row.timestamp,
-    row.event_type,
-    row.pressure,
-    row.temperature,
-  ]);
-
-  doc.autoTable({
+  // Use the autoTable function directly
+  autoTable(doc, {
     head: [["Timestamp", "Event", "Pressure", "Temperature"]],
-    body: tableData,
+    body: rows.map(row => [
+      row.timestamp ?? "",
+      row.event_type ?? "",
+      row.pressure ?? "",
+      row.temperature ?? "",
+    ]),
     startY: 25,
   });
 
-  doc.save("machine-log.pdf");
+  doc.save("pump-log.pdf");
 };
 
 const MachineLog = ({ rows, onClose }) => {
@@ -53,9 +50,13 @@ const MachineLog = ({ rows, onClose }) => {
 
       <div className="log-actions">
         <button onClick={onClose}>Close</button>
-        <button onClick={() => downloadPDF(rows) }>
+        <button onClick={() => { 
+            console.log("Download PDF clicked"); 
+            downloadPDF(rows); 
+        }}>
           Download PDF
         </button>
+
       </div>
     </div>
   );

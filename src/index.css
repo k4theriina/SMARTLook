@@ -25,7 +25,7 @@ body {
   position: fixed;
   top: 40px;
   left: 40px;
-  width: 80px;
+  width: 60px;
   height: auto;
   z-index: 10;        /* above canvas */
   pointer-events: none; /* doesn’t block mouse */
@@ -37,6 +37,8 @@ body {
   z-index: 10;
   pointer-events: none;
 } */
+
+
 
 
 canvas {
