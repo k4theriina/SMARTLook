@@ -31,15 +31,16 @@ body {
   pointer-events: none; /* doesn’t block mouse */
 }
 
-.ui-overlay {
+/* .ui-overlay {
   position: fixed;
   inset: 0;
   z-index: 10;
   pointer-events: none;
-}
+} */
 
 
 canvas {
+  pointer-events: auto;
   flex: 1;
   z-index: 0;
 }
@@ -52,67 +53,312 @@ canvas {
   visibility: visible;
 }
 
-/* Dashboard & log should capture clicks */
-.dashboard,
-.log-panel {
-  position: fixed;
+/* changes */
+
+.dashboard {
+  visibility: hidden;
+  position: absolute;
+  top: 15%;
+  right: 5%;
+  width: 380px;
+  max-height: 80vh;
+
+  background: linear-gradient(
+    180deg,
+    #0f1115 0%,
+    #0a0d12 100%
+  );
+
+  color: #e6e9ee;
+  padding: 18px 18px 20px;
+
+  border-radius: 18px;
+  border-left: 5px solid #0a7afd;
+
+  box-shadow:
+    0 0 0 1px rgba(10, 122, 253, 0.15),
+    0 12px 30px rgba(0, 0, 0, 0.6);
+
+  overflow-y: auto;
   pointer-events: auto;
   z-index: 20;
 }
 
-/* Optional: cursor feedback */
+.dashboard h1 {
+  display: flex;
+  align-items: center;
+
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dashboard section {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 14px;
+
+  padding: 12px 14px;
+  margin-bottom: 14px;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.dashboard h3 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+
+  color: #9aa4b2;
+  margin-bottom: 8px;
+}
+
+.dashboard ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dashboard li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 14px;
+  padding: 6px 0;
+
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+.dashboard li:last-child {
+  border-bottom: none;
+}
+
+.dashboard li span {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.LogButton {
+  width: 100%;
+  height: 46px;
+
+  margin-top: 14px;
+
+  background: linear-gradient(
+    180deg,
+    #f7f9f8,
+    #e6e9ee
+  );
+
+  color: #1e1e1e;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+
+  border: none;
+  border-radius: 14px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.35);
+}
+
+.LogButton:hover {
+  background: #ffffff;
+  transform: translateY(-1px);
+}
+
+.LogButton:active {
+  transform: translateY(0);
+}
+
+.dashboard::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dashboard::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+canvas {
+  z-index: 0;
+}
+
+.dashboard,
+.log-panel {
+  position: fixed;
+  z-index: 20;
+}
+
 .dashboard button,
 .log-panel button {
   cursor: pointer;
 }
 
-.dashboard {
-  visibility: hidden;
-  top: 25%;
-  right: 5%;
-  border-radius: 20px;
+
+/* AAAAAA */
+
+/* ============================
+   MACHINE LOG PANEL
+   ============================ */
+
+.log-panel {
   position: fixed;
-  z-index: 15;
-  width: 360px;
-  background: #111;
-  color: #fff;
-  padding: 16px;
-  border-left: 5px solid #0A7AFD;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70vw;
+  max-width: 900px;
+  max-height: 70vh;
+
+  background: linear-gradient(
+    180deg,
+    #121212 0%,
+    #0b0b0b 100%
+  );
+
+  color: #eaeaea;
+  border-radius: 18px;
+  padding: 20px 24px;
+
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+
+  z-index: 30;
+  overflow: hidden;
+
+  animation: slideUp 0.35s ease-out;
+}
+
+/* Header */
+.log-panel h2 {
+  margin: 0 0 14px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #9ecbff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 10px;
+}
+
+/* ============================
+   TABLE STYLING
+   ============================ */
+
+.log-panel table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.log-panel thead {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.log-panel th {
+  text-align: left;
+  padding: 10px 8px;
+  font-weight: 600;
+  color: #bcdcff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.log-panel td {
+  padding: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #d8d8d8;
+}
+
+/* Zebra striping */
+.log-panel tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Hover highlight */
+.log-panel tbody tr:hover {
+  background: rgba(10, 122, 253, 0.15);
+}
+
+/* Scroll behavior */
+.log-panel table {
+  display: block;
+  max-height: 45vh;
   overflow-y: auto;
 }
 
-.dashboard h1 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom:5px;
+.log-panel thead,
+.log-panel tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
 
-.dashboard h2 {
-  margin-bottom: 12px;
+/* ============================
+   ACTION BUTTONS
+   ============================ */
+
+.log-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
 }
 
-.dashboard section {
-  margin-bottom: 16px;
+.log-actions button {
+  padding: 10px 16px;
+  border-radius: 14px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.dashboard h3 {
-  font-size: 14px;
-  color: #aaa;
-  margin-bottom: 6px;
+/* Close button */
+.log-actions button:first-child {
+  background: #2a2a2a;
+  color: #ddd;
 }
 
-.LogButton {
-  position: absolute;
-  background-color: #F3F5F3;
-  width: 140px;
-  height: 50px;
-  margin: 10px;
-  top: 2px;
-  color: #1E1E1E;
-  border-radius: 20px;
-  z-index: 20;
+.log-actions button:first-child:hover {
+  background: #3a3a3a;
 }
 
-.log-panel {
-  background-color: #F3F5F3;
+/* Download button */
+.log-actions button:last-child {
+  background: linear-gradient(135deg, #0a7afd, #4aa3ff);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(10, 122, 253, 0.35);
+}
+
+.log-actions button:last-child:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(10, 122, 253, 0.45);
+}
+
+/* ============================
+   ANIMATIONS
+   ============================ */
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 30px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }

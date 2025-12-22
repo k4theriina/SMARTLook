@@ -21,7 +21,9 @@ export const Dashboard = ({
   };
 
   return (
-    <>
+    <div 
+      onPointerDown={(e) => e.stopPropagation()}
+      onClick={(e) => e.stopPropagation()}>
       <div className={className}>
         <h1> <span
             style={{
@@ -72,16 +74,18 @@ export const Dashboard = ({
             <li>Last Event: N/A</li>
           </ul>
         </section>
+
+        
+        <button className="LogButton" style={{ cursor: "pointer" }}
+    onClick={() => {
+      console.log("VIEW LOGS CLICKED");
+      setLogVisible(true);
+    }}>
+          View Logs
+        </button>
       </div>
 
-      {/* <button className="LogButton" style={{ cursor: "pointer" }}
-  onClick={() => {
-    console.log("VIEW LOGS CLICKED");
-    setLogVisible(true);
-  }}>
-        View Logs
-      </button> */}
-    </>
+    </div>
     
   );
 };

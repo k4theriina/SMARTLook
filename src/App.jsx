@@ -84,7 +84,6 @@ useEffect(() => {
         />
       </Canvas>
 
-      <div className="ui-overlay">
         {dashboardData && (
           <Dashboard
             className={`dashboard ${dashboardVisible ? "seen" : "hidden"}`}
@@ -107,7 +106,6 @@ useEffect(() => {
             rows={rows.slice(0, currentIndex + 1)}
             onClose={() => setLogVisible(false)}
           /> */}
-          </div>
 
       <img
         src="EyeLogo.svg"

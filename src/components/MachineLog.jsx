@@ -24,8 +24,11 @@ const downloadPDF = (rows) => {
 
 const MachineLog = ({ rows, onClose }) => {
   return (
-    <div className="log-panel">
-      <h2>Machine Event Log</h2>
+    <div className="log-panel"
+      onPointerDown={(e) => e.stopPropagation()}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <h2>Pump Event Log</h2>
 
       <table>
         <thead>
