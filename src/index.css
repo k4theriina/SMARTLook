@@ -60,10 +60,10 @@ canvas {
 .dashboard {
   visibility: hidden;
   position: absolute;
-  top: 15%;
+  top: 10%;
   right: 5%;
   width: 380px;
-  max-height: 80vh;
+  max-height: 90vh;
 
   background: linear-gradient(
     180deg,
@@ -171,6 +171,11 @@ canvas {
 
   box-shadow:
     0 4px 10px rgba(0, 0, 0, 0.35);
+}
+
+#maintenence {
+  background: #0A7AFD;
+  color: #f7f9f8;
 }
 
 .LogButton:hover {
