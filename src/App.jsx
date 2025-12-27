@@ -20,6 +20,8 @@ function App() {
   const [logVisible, setLogVisible] = useState(false);
   const logRows = rows.slice(0, currentIndex + 1);
   const [aiOpen, setAiOpen] = useState(false);
+  const [aiVisible, setAiVisible] = useState(false);
+
 
 
 
@@ -61,6 +63,13 @@ useEffect(() => {
   return () => clearInterval(interval);
 }, [rows]);
 
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setAiVisible(true);
+  }, 3000); // 3000ms = 3 seconds
+
+  return () => clearTimeout(timer);
+}, []);
 
   return (
     <>
@@ -106,15 +115,18 @@ useEffect(() => {
           />
           )}
 
-      <AiHelper 
-        aiOpen={aiOpen} 
-        onClose={() => setAiOpen(false)} 
-        dashboardData={dashboardData} />
+      {aiVisible && (
+        <AiHelper 
+          aiOpen={aiOpen} 
+          onClose={() => setAiOpen(false)} 
+          dashboardData={dashboardData} 
+        />
+      )}
 
       <img
         src="EyeLogo.svg"
         className={`logo ${aiOpen ? "active" : ""}`}
-        onClick={() => setAiOpen(true)}
+        onClick={() => setAiOpen((prev) => !prev)}
       />
 
 
