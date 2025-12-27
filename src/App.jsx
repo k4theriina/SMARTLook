@@ -5,6 +5,7 @@ import { WebGPURenderer } from "three/webgpu";
 import Papa from "papaparse";
 import createVerticalGradientTexture from "./components/createVerticalGradientTexture";
 
+import AiHelper from "./components/aiHelper";
 import { Experience } from "./components/Experience";
 import { Dashboard } from "./components/Dashboard";
 import { MachineLog } from "./components/MachineLog";
@@ -18,6 +19,8 @@ function App() {
   const [dashboardData, setDashboardData] = useState(null);
   const [logVisible, setLogVisible] = useState(false);
   const logRows = rows.slice(0, currentIndex + 1);
+  const [aiOpen, setAiOpen] = useState(false);
+
 
 
 
@@ -102,16 +105,16 @@ useEffect(() => {
             onClose={() => setLogVisible(false)}
           />
           )}
-          {/* <MachineLog
-            rows={rows.slice(0, currentIndex + 1)}
-            onClose={() => setLogVisible(false)}
-          /> */}
+
+      <AiHelper aiOpen={aiOpen} onClose={() => setAiOpen(false)} />
 
       <img
         src="EyeLogo.svg"
-        className="logo"
-        >
-      </img>
+        className={`logo ${aiOpen ? "active" : ""}`}
+        onClick={() => setAiOpen(true)}
+      />
+
+
     </>
   );
 }

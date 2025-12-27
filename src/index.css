@@ -28,15 +28,16 @@ body {
   width: 60px;
   height: auto;
   z-index: 10;        /* above canvas */
-  pointer-events: none; /* doesn’t block mouse */
+
+  cursor: pointer;
+  transition: filter 0.25s ease, transform 0.25s ease;
+  z-index: 3000;
 }
 
-/* .ui-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 10;
-  pointer-events: none;
-} */
+.logo:hover {
+  filter: drop-shadow(0 0 3px #0A7AFD);
+  transform: scale(1.05);
+}
 
 
 
@@ -368,4 +369,83 @@ canvas {
     opacity: 1;
     transform: translate(-50%, 0);
   }
+}
+
+/*  */
+
+.aiChat {
+  color: #F3F5F3;
+  position: absolute;
+  z-index: 4000;
+  pointer-events: auto;
+  top: 55px;
+  left: 130px;
+  background-color: #333333;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 40px;
+}
+
+.aiChat::after {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 18px;
+
+  width: 0;
+  height: 0;
+
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #333333;
+}
+
+/*  */
+
+.aiPanel {
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+  width: 320px;
+  height: 80%;
+  background: #111;
+  color: white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  z-index: 5000;
+  pointer-events: auto;
+}
+
+.aiHeader {
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #333;
+}
+
+.aiMessages {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+.ai-message.bot {
+  background: #222;
+  padding: 10px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.aiInput {
+  border: none;
+  background-color: #222;
+  padding: 12px;
+  border-radius: 0 0 20px 20px;
+  outline: none;
+}
+
+.closeButton:hover {
+  cursor: pointer;
 }

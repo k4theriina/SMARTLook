@@ -85,7 +85,7 @@ export const Dashboard = ({
 
         <button className="LogButton" id="maintenence" style={{ cursor: "pointer" }}
     onClick={() => {
-      setLogVisible(true);
+      
     }}>
           Schedule Maintenence
         </button>
