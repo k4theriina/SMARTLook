@@ -15,7 +15,7 @@ export const Experience = ({ onPumpClick, roomOffset, eventType }) => {
         <SmartRoom
           position={[2.5 + roomOffset, -2.5, 7 - roomOffset]}
           onPumpClick={onPumpClick}
-          eventType={eventType} // ✅ REQUIRED
+          eventType={eventType}
         />
       </Suspense>
     </>

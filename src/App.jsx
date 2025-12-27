@@ -106,7 +106,10 @@ useEffect(() => {
           />
           )}
 
-      <AiHelper aiOpen={aiOpen} onClose={() => setAiOpen(false)} />
+      <AiHelper 
+        aiOpen={aiOpen} 
+        onClose={() => setAiOpen(false)} 
+        dashboardData={dashboardData} />
 
       <img
         src="EyeLogo.svg"

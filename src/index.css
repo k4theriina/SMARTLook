@@ -431,21 +431,71 @@ canvas {
   overflow-y: auto;
 }
 
-.ai-message.bot {
+.aiMessage.bot {
+  position: relative;
   background: #222;
   padding: 10px;
   border-radius: 12px;
   margin-bottom: 8px;
+  max-width: 80%;
+  padding-left: 15px;
 }
 
-.aiInput {
-  border: none;
-  background-color: #222;
-  padding: 12px;
-  border-radius: 0 0 20px 20px;
-  outline: none;
+.aiMessage.bot::after {
+  content: "";
+  position: absolute;
+  left: -7px;       /* position the tail outside the bubble */
+  top: 50%;         /* vertically center */
+  transform: translateY(-50%); /* center properly */
+  width: 0;
+  height: 0;
+
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #222;
 }
 
 .closeButton:hover {
   cursor: pointer;
+}
+
+/*  */
+
+/* User bubble (if you ever add it later) */
+.aiMessage.user {
+  align-self: flex-end;
+  background: #0a7afd;
+  color: #ffffff;
+  border-bottom-right-radius: 6px;
+}
+
+/* ===============================
+   ACTION BUTTONS
+================================ */
+.aiActions {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  border-top: 1px solid #222;
+}
+
+.aiActions button {
+  background: #1b1b1b;
+  color: #f3f5f3;
+
+  border: 1px solid #333;
+  border-radius: 12px;
+
+  padding: 10px;
+  font-size: 13px;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.aiActions button:hover {
+  background: #0a7afd;
+  border-color: #0a7afd;
 }
