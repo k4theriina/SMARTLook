@@ -5,17 +5,15 @@ const AiHelper = ({ aiOpen, onClose, dashboardData }) => {
     { role: "bot", text: "Hello, how can I help you?" }
   ]);
 
-  // Reset messages when AI panel is closed
-  useEffect(() => {
-    if (!aiOpen) {
-      setMessages([{ role: "bot", text: "Hello, how can I help you?" }]);
-    }
-  }, [aiOpen]);
-
-  const handleAction = (type) => {
+  const handleAction = (type, userText) => {
     if (!dashboardData) return;
 
-    let response = "";
+    setMessages((prev) => [
+    ...prev,
+    { role: "user", text: userText }
+  ]);
+  
+    let response = userText;
 
     if (type === "summarize") {
       response = `
@@ -34,7 +32,10 @@ Overall: Operating within normal parameters.
       response = "No immediate maintenance required. Monitor pump speed and temperature.";
     }
 
-    setMessages((prev) => [...prev, { role: "bot", text: response }]);
+    setMessages((prev) => [
+    ...prev,
+    { role: "bot", text: response }
+  ]);
   };
 
   return (
@@ -63,13 +64,13 @@ Overall: Operating within normal parameters.
           </div>
 
           <div className="aiActions">
-            <button onClick={() => handleAction("summarize")}>
+            <button onClick={() => handleAction("summarize", "Simplify machine status")}>
               Simplify machine status
             </button>
-            <button onClick={() => handleAction("predict")}>
+            <button onClick={() => handleAction("predict", "Predict next state")}>
               Predict next state
             </button>
-            <button onClick={() => handleAction("maintenance")}>
+            <button onClick={() => handleAction("maintenance", "Suggest maintenance")}>
               Suggest maintenance
             </button>
           </div>
