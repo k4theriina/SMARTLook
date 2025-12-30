@@ -5,38 +5,34 @@ const AiHelper = ({ aiOpen, onClose, dashboardData }) => {
     { role: "bot", text: "Hello, how can I help you?" }
   ]);
 
-  const handleAction = (type, userText) => {
-    if (!dashboardData) return;
+  const handleAction = async (type, userText) => {
+    setMessages((prev) => [...prev, { role: "user", text: userText }]);
+    setMessages((prev) => [...prev, { role: "bot", text: "Analyzing…" }]);
 
-    setMessages((prev) => [
-    ...prev,
-    { role: "user", text: userText }
-  ]);
-  
-    let response = userText;
+    try {
+        const res = await fetch("http://localhost:3000/api/ai-assistant", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            intent: type,
+            dashboard: dashboardData,
+        }),
+        });
 
-    if (type === "summarize") {
-      response = `
-Pressure: ${dashboardData.pressure} PSI
-Temperature: ${dashboardData.temperature} °C
-Status: ${dashboardData.event_type}
-Overall: Operating within normal parameters.
-`;
+        const data = await res.json();
+
+        setMessages((prev) => [
+        ...prev.slice(0, -1),
+        { role: "bot", text: data.reply },
+        ]);
+    } catch {
+        setMessages((prev) => [
+        ...prev.slice(0, -1),
+        { role: "bot", text: "⚠️ AI unavailable." },
+        ]);
     }
+    };
 
-    if (type === "predict") {
-      response = "Based on recent trends, pressure is expected to rise slightly in the next cycle.";
-    }
-
-    if (type === "maintenance") {
-      response = "No immediate maintenance required. Monitor pump speed and temperature.";
-    }
-
-    setMessages((prev) => [
-    ...prev,
-    { role: "bot", text: response }
-  ]);
-  };
 
   return (
     <>
