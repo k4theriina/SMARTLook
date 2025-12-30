@@ -1,16 +1,25 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Factory from "./pages/Factory";
 
-function App() {
+function AppRoutes() {
+  const location = useLocation();
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/factory" element={<Factory />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes key={location.pathname}>
+      <Route path="/" element={<Home />} />
+      <Route
+        path="/factory"
+        element={<Factory key={location.pathname} />}
+      />
+    </Routes>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <Router>
+      <AppRoutes />
+    </Router>
+  );
+}

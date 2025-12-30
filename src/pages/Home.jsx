@@ -5,14 +5,19 @@ const Home = () => {
 
   return (
     <div className="homePage">
-      <h1>SMARTLook</h1>
-      <p>Digital Twin Monitoring System</p>
+        
+        <img
+            src="Logo.svg"
+            id="HomeLogo"
+        ></img>
+      <h1 id="heading">A better visualization of SMART Factories. </h1>
+      <p id="caption">Look at your factory better, faster, and smarter.</p>
 
       <button
         className="startButton"
         onClick={() => navigate("/factory")}
       >
-        Start Digital Twin Factory
+        Get Started
       </button>
     </div>
   );
