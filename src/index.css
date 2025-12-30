@@ -514,7 +514,8 @@ canvas {
   padding: 10px 14px;
   border-radius: 12px;
   font-size: 14px;
-  line-height: 1.4;
+  white-space: pre-wrap;
+  line-height: 1.5;
 }
 
 .aiMessage.user {

@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+
 
 const AiHelper = ({ aiOpen, onClose, dashboardData }) => {
   const [messages, setMessages] = useState([
-    { role: "bot", text: "Hello, how can I help you?" }
+    { role: "bot", text: "Hello, I'm your AI Assistant Luke, how can I help you?" }
   ]);
 
   const handleAction = async (type, userText) => {
@@ -47,14 +49,14 @@ const AiHelper = ({ aiOpen, onClose, dashboardData }) => {
       {aiOpen && (
         <div className="aiPanel">
           <div className="aiHeader">
-            <span>AI Assistant</span>
+            <span>Luke - Your Personal AI Assistant</span>
             <button className="closeButton" onClick={onClose}>✕</button>
           </div>
 
           <div className="aiMessages">
             {messages.map((msg, i) => (
               <div key={i} className={`aiMessage ${msg.role}`}>
-                {msg.text}
+                <ReactMarkdown>{msg.text}</ReactMarkdown>
               </div>
             ))}
           </div>
