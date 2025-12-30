@@ -2618,7 +2618,7 @@ react-refresh@^0.18.0:
 
 react-router-dom@^7.11.0:
   version "7.11.0"
-  resolved "https://registry.npmjs.org/react-router-dom/-/react-router-dom-7.11.0.tgz"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-7.11.0.tgz#2165f63e52798bd0eb138480c098ad058cdf3413"
   integrity sha512-e49Ir/kMGRzFOOrYQBdoitq3ULigw4lKbAyKusnvtDu2t4dBX4AGYPrzNvorXmVuOyeakai6FUPW5MmibvVG8g==
   dependencies:
     react-router "7.11.0"

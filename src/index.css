@@ -39,7 +39,23 @@ body {
   transform: scale(1.05);
 }
 
+.home {
+  position: fixed;
+  top: 50px;
+  right: 40px;
+  width: 40px;
+  height: auto;
+  z-index: 10;        /* above canvas */
 
+  cursor: pointer;
+  transition: filter 0.25s ease, transform 0.25s ease;
+  z-index: 3000;
+}
+
+.home:hover {
+  filter: drop-shadow(0 0 3px #0A7AFD);
+  transform: scale(1.05);
+}
 
 
 canvas {
@@ -539,4 +555,29 @@ canvas {
 
 .aiMessages::-webkit-scrollbar-thumb:hover {
   background-color: #555;
+}
+
+.homePage {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #0f172a;
+  color: white;
+}
+
+.startButton {
+  margin-top: 24px;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #38bdf8;
+  color: black;
+}
+
+.startButton:hover {
+  background: #0ea5e9;
 }
