@@ -618,3 +618,12 @@ canvas {
     right: -140px;
     width: 1100px;
 }
+
+#transition {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  background: black;
+}

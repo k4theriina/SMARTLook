@@ -31,7 +31,7 @@ export const Loader = () => {
           style={{
             color: "#0a7afd",
             fontSize: "1.5em",
-            fontFamily: "space-mono",
+            fontFamily: 'Roboto',
             animation: "pulse 1.5s infinite",
             whiteSpace: "nowrap",
 
