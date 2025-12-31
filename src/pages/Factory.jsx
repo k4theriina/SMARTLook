@@ -22,10 +22,17 @@ function Factory() {
   const [aiOpen, setAiOpen] = useState(false);
   const [aiVisible, setAiVisible] = useState(false);
 
+  const [canvasKey, setCanvasKey] = useState(0);
+  
   const handlePumpClick = () => {
     setDashboardVisible((v) => !v);
     setRoomOffset((o) => (o === 0 ? -5 : 0));
   };
+
+  // Force full WebGPU teardown on every entry
+  useEffect(() => {
+    setCanvasKey((k) => k + 1);
+  }, [location.pathname]);
 
   // Load CSV
   useEffect(() => {
@@ -64,8 +71,7 @@ function Factory() {
 
   return (
     <>
-      {/* Canvas with key tied to location to force remount */}
-      <CanvasWrapper key={location.key}>
+      <CanvasWrapper key={canvasKey}>
         <Suspense fallback={<Loader />}>
           <Experience
             onPumpClick={handlePumpClick}

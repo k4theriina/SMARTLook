@@ -12,7 +12,7 @@ function AppRoutes() {
 
     const timer = setTimeout(() => {
       setTransitioning(false);
-    }, 600); // controls transition length
+    }, 600);
 
     return () => clearTimeout(timer);
   }, [location.pathname]);
