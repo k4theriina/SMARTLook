@@ -1,3 +1,5 @@
+// Loading page
+
 import { Html, useProgress } from "@react-three/drei";
 
 export const Loader = () => {

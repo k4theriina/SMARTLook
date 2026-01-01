@@ -1,4 +1,4 @@
-// CanvasWrapper.jsx
+
 import { Canvas, extend } from "@react-three/fiber";
 import * as THREE from "three/webgpu";
 import { WebGPURenderer } from "three/webgpu";

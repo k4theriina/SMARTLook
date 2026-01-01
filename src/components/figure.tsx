@@ -1,3 +1,5 @@
+// Figure for 3D SMARTLook logo on home page
+
 
 import React, { useRef, useMemo, useState } from "react";
 import { useLoader } from "@react-three/fiber";

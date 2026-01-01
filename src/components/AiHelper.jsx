@@ -11,6 +11,7 @@ const AiHelper = ({ aiOpen, onClose, dashboardData }) => {
     setMessages((prev) => [...prev, { role: "user", text: userText }]);
     setMessages((prev) => [...prev, { role: "bot", text: "Analyzing…" }]);
 
+    // gets AI data from backend
     try {
         const res = await fetch("http://localhost:3000/api/ai-assistant", {
         method: "POST",
@@ -35,17 +36,16 @@ const AiHelper = ({ aiOpen, onClose, dashboardData }) => {
     }
     };
 
-
+    // default chat bubble
   return (
     <>
-      {/* SPEECH BUBBLE (only when closed) */}
       {!aiOpen && (
         <div className="aiChat" onClick={onClose}>
           Hello, how can I help you?
         </div>
       )}
 
-      {/* CHAT PANEL (only when open) */}
+      {/* ai dashboard */}
       {aiOpen && (
         <div className="aiPanel">
           <div className="aiHeader">
@@ -61,6 +61,7 @@ const AiHelper = ({ aiOpen, onClose, dashboardData }) => {
             ))}
           </div>
 
+            {/* buttons on dashboard || made buttons for simplicity and control */}
           <div className="aiActions">
             <button onClick={() => handleAction("summarize", "Simplify machine status")}>
               Simplify machine status

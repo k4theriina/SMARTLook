@@ -7,7 +7,7 @@ import { Loader } from "../components/Loader";
 import { Experience } from "../components/Experience";
 import { Dashboard } from "../components/Dashboard";
 import { MachineLog } from "../components/MachineLog";
-import AiHelper from "../components/aiHelper";
+import AiHelper from "../components/AiHelper";
 
 function Factory() {
   const navigate = useNavigate();
