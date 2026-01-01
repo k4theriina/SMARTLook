@@ -8,8 +8,8 @@ Read the docs: https://docs.google.com/document/d/1zOzXZy4jg6bfhiRcSIwRQHnupFHmy
 
 Want to run it locally? Run this:
 
-`yarn`
-`yarn dev`
+```yarn```
+```yarn dev```
 
 Open a new terminal and run
-`node ./server/index.js`
+```node ./server/index.js```
